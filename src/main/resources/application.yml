@@ -1,0 +1,9 @@
+## YAML Template.
+---
+spring:
+    datasource:
+        url: jdbc:postgresql://localhost:5432/galica
+        user: denijal
+        password: k3babdzija
+    application:
+        name: Galica
