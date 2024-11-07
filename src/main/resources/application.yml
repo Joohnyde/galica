@@ -7,3 +7,6 @@ spring:
         password: k3babdzija
     application:
         name: Galica
+
+admin:
+    password: c3fcefba5a7316a36116d4819b7979c954b3d34492933441caf1ceaa4ff55f25b79f89e981f375bff4ee8a57f501f29c62149b205786d60da0cc9bba195fdf61
