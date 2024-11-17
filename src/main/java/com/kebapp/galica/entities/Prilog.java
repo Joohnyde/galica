@@ -24,7 +24,8 @@ import java.util.List;
 @Table(schema = "public", name = "prilog")
 @NamedQueries({
     @NamedQuery(name = "Prilog.findAll", query = "SELECT p FROM Prilog p"),
-    @NamedQuery(name = "Prilog.findByDefaultime", query = "SELECT p FROM Prilog p WHERE p.defaultime = :defaultime")})
+    @NamedQuery(name = "Prilog.findByDefaultime", query = "SELECT p FROM Prilog p WHERE p.defaultime = :defaultime"),
+    @NamedQuery(name = "Prilog.findByOpis", query = "SELECT p FROM Prilog p WHERE p.opis = :opis")})
 public class Prilog implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -35,6 +36,11 @@ public class Prilog implements Serializable {
     private Object id;
     @Column(name = "defaultime")
     private String defaultime;
+    @Lob
+    @Column(name = "slika")
+    private byte[] slika;
+    @Column(name = "opis")
+    private String opis;
     @OneToMany(mappedBy = "prilogId")
     private List<Prilogkategorija> prilogkategorijaList;
 
@@ -67,6 +73,22 @@ public class Prilog implements Serializable {
 
     public void setPrilogkategorijaList(List<Prilogkategorija> prilogkategorijaList) {
         this.prilogkategorijaList = prilogkategorijaList;
+    }
+    
+    public byte[] getSlika() {
+        return slika;
+    }
+
+    public void setSlika(byte[] slika) {
+        this.slika = slika;
+    }
+
+    public String getOpis() {
+        return opis;
+    }
+
+    public void setOpis(String opis) {
+        this.opis = opis;
     }
 
     @Override
