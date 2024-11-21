@@ -4,7 +4,9 @@
  */
 package com.kebapp.galica.controllers;
 
+import com.kebapp.galica.interfaces.interfaces.JeloInterface;
 import com.kebapp.galica.models.request.CreateJeloModel;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,6 +21,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("jelo")
 public class JeloController {
     
+    @Autowired
+    private JeloInterface jeloInterface;
     
     /*
         Ова метода се зове приликом креирања јела. Приступ медоти је заштићен и 

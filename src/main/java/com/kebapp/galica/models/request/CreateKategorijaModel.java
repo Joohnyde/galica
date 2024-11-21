@@ -59,6 +59,40 @@ public class CreateKategorijaModel implements Serializable {
             this.extraCena = extraCena;
             this.podrazumevano = podrazumevano;
         }
+
+        public UUID getPostojeciPrilog() {
+            return postojeciPrilog;
+        }
+
+        public void setPostojeciPrilog(UUID postojeciPrilog) {
+            this.postojeciPrilog = postojeciPrilog;
+        }
+
+        public CreatePrilogModel getNoviPrilog() {
+            return noviPrilog;
+        }
+
+        public void setNoviPrilog(CreatePrilogModel noviPrilog) {
+            this.noviPrilog = noviPrilog;
+        }
+
+        public Double getExtraCena() {
+            return extraCena;
+        }
+
+        public void setExtraCena(Double extraCena) {
+            this.extraCena = extraCena;
+        }
+
+        public Boolean getPodrazumevano() {
+            return podrazumevano;
+        }
+
+        public void setPodrazumevano(Boolean podrazumevano) {
+            this.podrazumevano = podrazumevano;
+        }
+        
+        
         
     }
 }
