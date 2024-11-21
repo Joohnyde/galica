@@ -43,21 +43,38 @@ public class JeloService implements JeloInterface {
         // Додај му постојеће категорије
         if(createJeloObject.getPostojeceKategorije() != null){
             
-            for(CreateJeloModel.PostojecaKategorija uuidKategorije : createJeloObject.getPostojeceKategorije()){
+            for(CreateJeloModel.PostojecaKategorija postojecaKategorija : createJeloObject.getPostojeceKategorije()){
                 
-                if(uuidKategorije == null)
+                if(postojecaKategorija == null) 
+                    throw new SemanticException("One of the given categories is null");
+                
+                Integer max = postojecaKategorija.getMax();
+                Integer min = postojecaKategorija.getMin();
+                if(!postojecaKategorija.getCopyMinMax()){
+                    if(max != null && max < 0 || min != null && min < 0 || max != null && min != null && min > max)
+                        throw new SemanticException("min and max must satisfy : 0 <= min <= max");
+                }
+                
+                UUID uuidKategorija = postojecaKategorija.getPostojeceKategorija();
+                
+                if(uuidKategorija == null)
                     throw new InvalidUUIDException("One of the given UUIDs was null");
                 /*
                     Ово враћа објекат у ком се заштићено може приступити катего-
                 рији из базе. Потребно је проверити постоји ли уопште тражена
                 категорија.
                 */
-                Optional<Kategorija> maybeKategorija = kategorijaRepository.findById(uuidKategorije);
+                Optional<Kategorijajelo> maybeKategorija = kategorijajeloRepository.findById(uuidKategorija);
                 if(maybeKategorija.isEmpty())
                     throw new InvalidUUIDException("One of the given category UUIDs could not be found");
                 
                 // Увежи постојећу категорију
-                Kategorijajelo novaKategorijaJelo = new Kategorijajelo();
+                Kategorijajelo novaKategorijaJelo = new Kategorijajelo(novoJelo, 
+                                                                       maybeKategorija.get().getKategorijaId(),
+                                                                       postojecaKategorija.getCopyMinMax() ? maybeKategorija.get().getMax() : max,
+                                                                       postojecaKategorija.getCopyMinMax() ? maybeKategorija.get().getMin() : min);
+                novoJelo.getKategorijajeloList().add(novaKategorijaJelo);
+                
             }
         }
         

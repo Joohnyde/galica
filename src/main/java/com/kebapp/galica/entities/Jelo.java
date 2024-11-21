@@ -17,6 +17,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.io.Serializable;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
 
@@ -74,6 +75,8 @@ public class Jelo implements Serializable {
         this.id = UUID.randomUUID();
         this.opis = model.getOpis();
         this.slika = model.getSlika();
+        
+        this.kategorijajeloList = new LinkedList<>();
     }
     
     public Jelo() {

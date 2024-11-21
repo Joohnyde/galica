@@ -15,6 +15,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import java.io.Serializable;
+import java.util.UUID;
 
 /**
  *
@@ -52,6 +53,15 @@ public class Kategorijajelo implements Serializable {
 
     public Kategorijajelo(Object id) {
         this.id = id;
+    }
+
+    public Kategorijajelo(Jelo novoJelo, Kategorija kategorija, Integer max, Integer min) {
+        this.id = UUID.randomUUID();
+        this.jeloId = novoJelo;
+        this.kategorijaId = kategorija;
+        this.max = max;
+        this.min = min;
+        
     }
 
     public Object getId() {
