@@ -4,19 +4,20 @@
  */
 package com.kebapp.galica.entities;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import jakarta.persistence.Basic;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.Lob;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.NamedQueries;
+import jakarta.persistence.NamedQuery;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 import java.io.Serializable;
 import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -33,7 +34,7 @@ public class Stavkaprilogkategorija implements Serializable {
     @Basic(optional = false)
     @Lob
     @Column(name = "id")
-    private Object id;
+    private UUID id;
     @JoinColumn(name = "prilogkategorija_id", referencedColumnName = "id")
     @ManyToOne
     private Prilogkategorija prilogkategorijaId;
@@ -46,15 +47,15 @@ public class Stavkaprilogkategorija implements Serializable {
     public Stavkaprilogkategorija() {
     }
 
-    public Stavkaprilogkategorija(Object id) {
+    public Stavkaprilogkategorija(UUID id) {
         this.id = id;
     }
 
-    public Object getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(Object id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 

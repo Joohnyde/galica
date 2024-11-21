@@ -5,11 +5,8 @@
 package com.kebapp.galica.controllers;
 
 import com.kebapp.galica.exceptions.HttpResponseException;
-import com.kebapp.galica.exceptions.InvalidUUIDException;
-import com.kebapp.galica.exceptions.SemanticException;
 import com.kebapp.galica.interfaces.interfaces.JeloInterface;
 import com.kebapp.galica.models.request.CreateJeloModel;
-import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -136,8 +133,8 @@ public class JeloController {
         try {
             return ResponseEntity.ok( this.jeloInterface.createJelo(body) );
         } catch (HttpResponseException ex) {
-            Logger.getLogger(JeloController.class.getName()).log(Level.INFO, null, ex);
-            return ResponseEntity.status(ex.getCode()).body(ex);
+            Logger.getLogger(JeloController.class.getName()).log(Level.INFO, ex.getLogged());
+            return ResponseEntity.status(ex.getCode()).body(ex.toString());
         }
     }
     

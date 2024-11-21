@@ -6,16 +6,16 @@ package com.kebapp.galica.entities;
 
 import com.kebapp.galica.exceptions.SemanticException;
 import com.kebapp.galica.models.request.CreateJeloModel;
-import javax.persistence.Basic;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Lob;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import jakarta.persistence.Basic;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
+import jakarta.persistence.NamedQueries;
+import jakarta.persistence.NamedQuery;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
@@ -40,7 +40,7 @@ public class Jelo implements Serializable {
     @Basic(optional = false)
     @Lob
     @Column(name = "id")
-    private Object id;
+    private UUID id;
     @Column(name = "ime")
     private String ime;
     @Column(name = "opis")
@@ -82,7 +82,7 @@ public class Jelo implements Serializable {
     public Jelo() {
     }
 
-    public Jelo(Object id) {
+    public Jelo(UUID id) {
         this.id = id;
     }
 
@@ -90,7 +90,7 @@ public class Jelo implements Serializable {
         return id;
     }
 
-    public void setId(Object id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 

@@ -4,20 +4,21 @@
  */
 package com.kebapp.galica.entities;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Lob;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import jakarta.persistence.Basic;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
+import jakarta.persistence.NamedQueries;
+import jakarta.persistence.NamedQuery;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -39,7 +40,7 @@ public class Narudzbina implements Serializable {
     @Basic(optional = false)
     @Lob
     @Column(name = "id")
-    private Object id;
+    private UUID id;
     @Lob
     @Column(name = "covek_id")
     private Object covekId;
@@ -62,15 +63,15 @@ public class Narudzbina implements Serializable {
     public Narudzbina() {
     }
 
-    public Narudzbina(Object id) {
+    public Narudzbina(UUID id) {
         this.id = id;
     }
 
-    public Object getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(Object id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 

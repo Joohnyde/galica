@@ -5,12 +5,13 @@
 package com.kebapp.galica.interfaces.repositories;
 
 import com.kebapp.galica.entities.Kategorija;
+import java.util.UUID;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
  *
  * @author denijal
  */
-public interface KategorijaRepository extends JpaRepository<Kategorija, Object> {
+public interface KategorijaRepository extends JpaRepository<Kategorija, UUID> {
     
 }

@@ -30,11 +30,19 @@ public abstract class HttpResponseException extends Exception implements Seriali
     public String getTitle() {
         return title;
     }
-
+    
     public String getMsg() {
         return message;
     }
     
+    public String getLogged(){
+        return "["+this.code+"] "+this.title+" : "+this.message;
+    }    
+
+    @Override
+    public String toString() {
+        return "{\"code\":"+this.code+",\"title\":\""+this.title+"\",\"msg\":\""+this.message+"\"}";
+    }
     
     
 }

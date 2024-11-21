@@ -5,12 +5,13 @@
 package com.kebapp.galica.interfaces.repositories;
 
 import com.kebapp.galica.entities.Jelo;
+import java.util.UUID;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
  *
  * @author denijal
  */
-public interface JeloRepository extends JpaRepository<Jelo, Object>{
+public interface JeloRepository extends JpaRepository<Jelo, UUID>{
     
 }
