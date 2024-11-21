@@ -14,10 +14,14 @@ import java.util.UUID;
 public class CreateKategorijaModel implements Serializable {
     private String ime;
     private PrilogKategorija[] prilozi;
+    private Integer min;
+    private Integer max;
 
-    public CreateKategorijaModel(String ime, PrilogKategorija[] prilozi) {
+    public CreateKategorijaModel(String ime, PrilogKategorija[] prilozi, Integer min, Integer max) {
         this.ime = ime;
         this.prilozi = prilozi;
+        this.min = min;
+        this.max = max;
     }
 
     public CreateKategorijaModel() {
@@ -38,8 +42,25 @@ public class CreateKategorijaModel implements Serializable {
     public void setPrilozi(PrilogKategorija[] prilozi) {
         this.prilozi = prilozi;
     }
+
+    public Integer getMin() {
+        return min;
+    }
+
+    public void setMin(Integer min) {
+        this.min = min;
+    }
+
+    public Integer getMax() {
+        return max;
+    }
+
+    public void setMax(Integer max) {
+        this.max = max;
+    }
+
     
-    class PrilogKategorija implements Serializable{
+    public class PrilogKategorija implements Serializable{
         private UUID postojeciPrilog;
         private CreatePrilogModel noviPrilog; 
         private Double extraCena = 0.0; 

@@ -17,10 +17,10 @@ public class CreateJeloModel implements Serializable{
     private byte[] slika; 
     private Double baseCena; 
     private Double baseTime = 5.0;
-    private UUID[] postojeceKategorije;
+    private PostojecaKategorija[] postojeceKategorije;
     private CreateKategorijaModel[] noveKategorije;
 
-    public CreateJeloModel(String ime, String opis, byte[] slika, Double baseCena, Double baseTime, UUID[] postojeceKategorije, CreateKategorijaModel[] noveKategorije) {
+    public CreateJeloModel(String ime, String opis, byte[] slika, Double baseCena, Double baseTime, PostojecaKategorija[] postojeceKategorije, CreateKategorijaModel[] noveKategorije) {
         this.ime = ime;
         this.opis = opis;
         this.slika = slika;
@@ -30,7 +30,7 @@ public class CreateJeloModel implements Serializable{
         this.noveKategorije = noveKategorije;
     }
     
-    public CreateJeloModel(String ime, String opis, byte[] slika, Double baseCena, UUID[] postojeceKategorije, CreateKategorijaModel[] noveKategorije) {
+    public CreateJeloModel(String ime, String opis, byte[] slika, Double baseCena, PostojecaKategorija[] postojeceKategorije, CreateKategorijaModel[] noveKategorije) {
         this.ime = ime;
         this.opis = opis;
         this.slika = slika;
@@ -82,11 +82,11 @@ public class CreateJeloModel implements Serializable{
         this.baseTime = baseTime;
     }
 
-    public UUID[] getPostojeceKategorije() {
+    public PostojecaKategorija[] getPostojeceKategorije() {
         return postojeceKategorije;
     }
 
-    public void setPostojeceKategorije(UUID[] postojeceKategorije) {
+    public void setPostojeceKategorije(PostojecaKategorija[] postojeceKategorije) {
         this.postojeceKategorije = postojeceKategorije;
     }
 
@@ -98,6 +98,57 @@ public class CreateJeloModel implements Serializable{
         this.noveKategorije = noveKategorije;
     }
     
+    
+    public class PostojecaKategorija{
+        private UUID postojeceKategorija;
+        private Integer min;
+        private Integer max;
+        private Boolean copyMinMax = true;
+
+        public PostojecaKategorija() {
+        }
+        
+        public PostojecaKategorija(UUID postojeceKategorija, Integer min, Integer max, Boolean copy){
+            this.postojeceKategorija = postojeceKategorija;
+            this.min = min;
+            this.max = max;
+            this.copyMinMax = copy;
+        }
+
+        public UUID getPostojeceKategorija() {
+            return postojeceKategorija;
+        }
+
+        public void setPostojeceKategorija(UUID postojeceKategorija) {
+            this.postojeceKategorija = postojeceKategorija;
+        }
+
+        public Integer getMin() {
+            return min;
+        }
+
+        public void setMin(Integer min) {
+            this.min = min;
+        }
+
+        public Integer getMax() {
+            return max;
+        }
+
+        public void setMax(Integer max) {
+            this.max = max;
+        }
+
+        public Boolean getCopyMinMax() {
+            return copyMinMax;
+        }
+
+        public void setCopyMinMax(Boolean copyMinMax) {
+            this.copyMinMax = copyMinMax;
+        }
+        
+        
+    }
     
 
 }

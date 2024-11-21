@@ -47,6 +47,8 @@ public class Kategorijajelo implements Serializable {
 
     public Kategorijajelo() {
     }
+    
+    
 
     public Kategorijajelo(Object id) {
         this.id = id;
