@@ -16,7 +16,7 @@ public class CreateJeloModel implements Serializable{
     private String opis; 
     private Byte[] slika; 
     private Double baseCena; 
-    private Double baseTime;
+    private Double baseTime = 5.0;
     private UUID[] postojeceKategorije;
     private CreateKategorijaModel[] noveKategorije;
 
@@ -26,6 +26,15 @@ public class CreateJeloModel implements Serializable{
         this.slika = slika;
         this.baseCena = baseCena;
         this.baseTime = baseTime;
+        this.postojeceKategorije = postojeceKategorije;
+        this.noveKategorije = noveKategorije;
+    }
+    
+    public CreateJeloModel(String ime, String opis, Byte[] slika, Double baseCena, UUID[] postojeceKategorije, CreateKategorijaModel[] noveKategorije) {
+        this.ime = ime;
+        this.opis = opis;
+        this.slika = slika;
+        this.baseCena = baseCena;
         this.postojeceKategorije = postojeceKategorije;
         this.noveKategorije = noveKategorije;
     }
