@@ -17,9 +17,11 @@ import jakarta.persistence.NamedQuery;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.io.Serializable;
+import java.sql.Types;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
+import org.hibernate.annotations.JdbcTypeCode;
 
 /**
  *
@@ -45,7 +47,7 @@ public class Jelo implements Serializable {
     private String ime;
     @Column(name = "opis")
     private String opis;
-    @Lob
+    @JdbcTypeCode(Types.BINARY)
     @Column(name = "slika")
     private byte[] slika;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
@@ -69,7 +71,7 @@ public class Jelo implements Serializable {
             throw new SemanticException("Base price and base time must be non-negative values");
         
         this.ime = model.getIme();
-        if(this.ime == null)
+        if(this.ime == null || this.ime.isBlank())
             throw new SemanticException("Dish name must be given");
         
         this.id = UUID.randomUUID();

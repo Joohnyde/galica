@@ -14,8 +14,10 @@ import jakarta.persistence.NamedQuery;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.io.Serializable;
+import java.sql.Types;
 import java.util.List;
 import java.util.UUID;
+import org.hibernate.annotations.JdbcTypeCode;
 
 /**
  *
@@ -37,7 +39,7 @@ public class Prilog implements Serializable {
     private UUID id;
     @Column(name = "defaultime")
     private String defaultime;
-    @Lob
+    @JdbcTypeCode(Types.BINARY)
     @Column(name = "slika")
     private byte[] slika;
     @Column(name = "opis")
