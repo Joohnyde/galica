@@ -14,13 +14,13 @@ import java.util.UUID;
 public class CreateJeloModel implements Serializable{
     private String ime;
     private String opis; 
-    private Byte[] slika; 
+    private byte[] slika; 
     private Double baseCena; 
     private Double baseTime = 5.0;
     private UUID[] postojeceKategorije;
     private CreateKategorijaModel[] noveKategorije;
 
-    public CreateJeloModel(String ime, String opis, Byte[] slika, Double baseCena, Double baseTime, UUID[] postojeceKategorije, CreateKategorijaModel[] noveKategorije) {
+    public CreateJeloModel(String ime, String opis, byte[] slika, Double baseCena, Double baseTime, UUID[] postojeceKategorije, CreateKategorijaModel[] noveKategorije) {
         this.ime = ime;
         this.opis = opis;
         this.slika = slika;
@@ -30,7 +30,7 @@ public class CreateJeloModel implements Serializable{
         this.noveKategorije = noveKategorije;
     }
     
-    public CreateJeloModel(String ime, String opis, Byte[] slika, Double baseCena, UUID[] postojeceKategorije, CreateKategorijaModel[] noveKategorije) {
+    public CreateJeloModel(String ime, String opis, byte[] slika, Double baseCena, UUID[] postojeceKategorije, CreateKategorijaModel[] noveKategorije) {
         this.ime = ime;
         this.opis = opis;
         this.slika = slika;
@@ -58,11 +58,11 @@ public class CreateJeloModel implements Serializable{
         this.opis = opis;
     }
 
-    public Byte[] getSlika() {
+    public byte[] getSlika() {
         return slika;
     }
 
-    public void setSlika(Byte[] slika) {
+    public void setSlika(byte[] slika) {
         this.slika = slika;
     }
 

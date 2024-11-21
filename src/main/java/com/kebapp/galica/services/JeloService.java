@@ -4,8 +4,12 @@
  */
 package com.kebapp.galica.services;
 
+import com.kebapp.galica.entities.Jelo;
+import com.kebapp.galica.exceptions.SemanticException;
 import com.kebapp.galica.interfaces.interfaces.JeloInterface;
+import com.kebapp.galica.interfaces.repositories.JeloRepository;
 import com.kebapp.galica.models.request.CreateJeloModel;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -14,10 +18,17 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class JeloService implements JeloInterface {
+    
+    @Autowired
+    private JeloRepository JeloRepository;
 
     @Override
-    public void createJelo(CreateJeloModel createJeloObject) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void createJelo(CreateJeloModel createJeloObject) throws SemanticException {
+        Jelo novoJelo = new Jelo(createJeloObject);
+        
+        // Додај категорије и прилоге
+        
+        JeloRepository.saveAndFlush(novoJelo);
     }
     
 }

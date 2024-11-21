@@ -11,9 +11,9 @@ package com.kebapp.galica.models.request;
 public class CreatePrilogModel {
     private String ime;
     private String opis;
-    private Byte[] slika;
+    private byte[] slika;
 
-    public CreatePrilogModel(String ime, String opis, Byte[] slika) {
+    public CreatePrilogModel(String ime, String opis, byte[] slika) {
         this.ime = ime;
         this.opis = opis;
         this.slika = slika;
@@ -38,11 +38,11 @@ public class CreatePrilogModel {
         this.opis = opis;
     }
 
-    public Byte[] getSlika() {
+    public byte[] getSlika() {
         return slika;
     }
 
-    public void setSlika(Byte[] slika) {
+    public void setSlika(byte[] slika) {
         this.slika = slika;
     }
     

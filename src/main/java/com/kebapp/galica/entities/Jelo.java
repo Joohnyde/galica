@@ -4,6 +4,8 @@
  */
 package com.kebapp.galica.entities;
 
+import com.kebapp.galica.exceptions.SemanticException;
+import com.kebapp.galica.models.request.CreateJeloModel;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -16,6 +18,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -54,6 +57,25 @@ public class Jelo implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "jeloId")
     private List<Kategorijajelo> kategorijajeloList;
 
+    public Jelo(CreateJeloModel model) throws SemanticException{
+        
+        this.basecena = model.getBaseCena();
+        this.basetime = model.getBaseTime();
+        
+        if(this.basecena == null)
+            throw new SemanticException("Base price cannot be null");
+        if(this.basecena < 0 || this.basetime < 0)
+            throw new SemanticException("Base price and base time must be non-negative values");
+        
+        this.ime = model.getIme();
+        if(this.ime == null)
+            throw new SemanticException("Dish name must be given");
+        
+        this.id = UUID.randomUUID();
+        this.opis = model.getOpis();
+        this.slika = model.getSlika();
+    }
+    
     public Jelo() {
     }
 

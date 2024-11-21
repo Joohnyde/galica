@@ -4,6 +4,7 @@
  */
 package com.kebapp.galica.interfaces.interfaces;
 
+import com.kebapp.galica.exceptions.SemanticException;
 import com.kebapp.galica.models.request.CreateJeloModel;
 
 /**
@@ -12,6 +13,6 @@ import com.kebapp.galica.models.request.CreateJeloModel;
  */
 public interface JeloInterface {
     
-    public void createJelo(CreateJeloModel createJeloObject);
+    public void createJelo(CreateJeloModel createJeloObject) throws SemanticException;
     
 }
