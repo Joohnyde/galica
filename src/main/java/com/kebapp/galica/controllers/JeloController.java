@@ -4,8 +4,14 @@
  */
 package com.kebapp.galica.controllers;
 
+import com.kebapp.galica.exceptions.HttpResponseException;
+import com.kebapp.galica.exceptions.InvalidUUIDException;
+import com.kebapp.galica.exceptions.SemanticException;
 import com.kebapp.galica.interfaces.interfaces.JeloInterface;
 import com.kebapp.galica.models.request.CreateJeloModel;
+import java.util.UUID;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -126,8 +132,13 @@ public class JeloController {
         Линк ка таску: https://tree.taiga.io/project/joohnyde-galica/us/6
     */
     @PostMapping("create")
-    public ResponseEntity<Void> createJelo(@RequestBody CreateJeloModel body){
-        return null;
+    public ResponseEntity<Object> createJelo(@RequestBody CreateJeloModel body){
+        try {
+            return ResponseEntity.ok( this.jeloInterface.createJelo(body) );
+        } catch (HttpResponseException ex) {
+            Logger.getLogger(JeloController.class.getName()).log(Level.INFO, null, ex);
+            return ResponseEntity.status(ex.getCode()).body(ex);
+        }
     }
     
 }

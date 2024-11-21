@@ -37,7 +37,7 @@ public class JeloService implements JeloInterface {
     private KategorijaInterface kategorijaInterface;
     
     @Override
-    public void createJelo(CreateJeloModel createJeloObject) throws SemanticException, InvalidUUIDException {
+    public UUID createJelo(CreateJeloModel createJeloObject) throws SemanticException, InvalidUUIDException {
         // Креирај јело
         Jelo novoJelo = new Jelo(createJeloObject);
         
@@ -100,6 +100,7 @@ public class JeloService implements JeloInterface {
             }
         }
         JeloRepository.saveAndFlush(novoJelo);
+        return (UUID) novoJelo.getId();
     }
     
 }
