@@ -5,6 +5,8 @@
 package com.kebapp.galica.exceptions;
 
 import java.io.Serializable;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 
 /**
  *
@@ -16,11 +18,15 @@ public abstract class HttpResponseException extends Exception implements Seriali
     private final String title;
     private final String message;
     
+    public final ResponseEntity response;
+    
     public HttpResponseException(int code, String title, String message){
         super(message);
         this.code = code;
         this.title = title;
         this.message = message;
+        
+        response = ResponseEntity.status(this.code).contentType(MediaType.APPLICATION_JSON).body("{\"code\":"+this.code+",\"title\":\""+this.title+"\",\"msg\":\""+this.message+"\"}");
     }
 
     public int getCode() {
@@ -35,14 +41,10 @@ public abstract class HttpResponseException extends Exception implements Seriali
         return message;
     }
     
-    public String getLogged(){
+    @Override
+    public String toString(){
         return "["+this.code+"] "+this.title+" : "+this.message;
     }    
-
-    @Override
-    public String toString() {
-        return "{\"code\":"+this.code+",\"title\":\""+this.title+"\",\"msg\":\""+this.message+"\"}";
-    }
     
     
 }

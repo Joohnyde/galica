@@ -10,6 +10,7 @@ import com.kebapp.galica.models.request.CreateJeloModel;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -133,8 +134,8 @@ public class JeloController {
         try {
             return ResponseEntity.ok( this.jeloInterface.createJelo(body) );
         } catch (HttpResponseException ex) {
-            Logger.getLogger(JeloController.class.getName()).log(Level.INFO, ex.getLogged());
-            return ResponseEntity.status(ex.getCode()).body(ex.toString());
+            Logger.getLogger(JeloController.class.getName()).log(Level.INFO, ex.toString());
+            return ex.response;
         }
     }
     
