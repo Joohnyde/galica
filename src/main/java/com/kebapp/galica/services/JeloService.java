@@ -17,6 +17,7 @@ import com.kebapp.galica.interfaces.repositories.JeloRepository;
 import com.kebapp.galica.models.request.CreateJeloModel;
 import com.kebapp.galica.models.request.CreateKategorijaModel;
 import com.kebapp.galica.models.utils.PostojecaKategorija;
+import java.util.LinkedList;
 import java.util.Optional;
 import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +43,8 @@ public class JeloService implements JeloInterface {
     public UUID createJelo(CreateJeloModel createJeloObject) throws SemanticException, InvalidUUIDException, MissingParameterException {
         // Креирај јело
         Jelo novoJelo = new Jelo(createJeloObject);
+        
+        LinkedList<Kategorijajelo> listaKategorija = new LinkedList<>();
         
         // Додај му постојеће категорије
         if(createJeloObject.getPostojeceKategorije() != null){
@@ -76,7 +79,7 @@ public class JeloService implements JeloInterface {
                                                                        maybeKategorija.get().getKategorijaId(),
                                                                        postojecaKategorija.getCopyMinMax() ? maybeKategorija.get().getMax() : max,
                                                                        postojecaKategorija.getCopyMinMax() ? maybeKategorija.get().getMin() : min);
-                novoJelo.getKategorijajeloList().add(novaKategorijaJelo);
+                listaKategorija.add(novaKategorijaJelo);
             }
         }
         
@@ -98,16 +101,19 @@ public class JeloService implements JeloInterface {
                 
                 // Претходна функција није бацила грешку - Додај нову категорију
                 Kategorijajelo novaKategorijaJelo = new Kategorijajelo(novoJelo, novaKategorija, min, max);
-                novoJelo.getKategorijajeloList().add(novaKategorijaJelo);
+                listaKategorija.add(novaKategorijaJelo);
             }
         }
         
         // Све је прошло да ваља - ручно каскадно сачувај све објекте
-        for(Kategorijajelo kategorijaJelo : novoJelo.getKategorijajeloList()){
+        
+        jeloRepository.saveAndFlush(novoJelo);
+        
+        for(Kategorijajelo kategorijaJelo : listaKategorija){
             kategorijaInterface.save(kategorijaJelo.getKategorijaId());
             kategorijajeloInterface.save(kategorijaJelo);
         }
-        jeloRepository.saveAndFlush(novoJelo);
+        
         return (UUID) novoJelo.getId();
     }
     

@@ -18,6 +18,7 @@ import com.kebapp.galica.interfaces.repositories.PrilogRepository;
 import com.kebapp.galica.models.request.CreateKategorijaModel;
 import com.kebapp.galica.models.request.CreatePrilogModel;
 import com.kebapp.galica.models.utils.PrilogKategorija;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -85,11 +86,17 @@ public class KategorijaService implements KategorijaInterface{
 
     @Override
     public void save(Kategorija kategorija) {
-        for(Prilogkategorija prilogKategorija : kategorija.getPrilogkategorijaList()){
-            prilogInterface.save(prilogKategorija.getPrilogId());
-            this.prilogkategorijaInterface.save(prilogKategorija);
-        }
+        
+        List<Prilogkategorija> listaPriloga = kategorija.getPrilogkategorijaList();
+        
+        kategorija.setPrilogkategorijaList(null);
         this.kategorijaRepository.saveAndFlush(kategorija);
+        kategorija.setPrilogkategorijaList(listaPriloga);
+        
+        for(Prilogkategorija prilogKategorija : listaPriloga){
+            prilogInterface.save(prilogKategorija.getPrilogId());
+            prilogkategorijaInterface.save(prilogKategorija);
+        }
     }
     
 }

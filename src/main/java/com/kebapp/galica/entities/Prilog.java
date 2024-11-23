@@ -62,6 +62,7 @@ public class Prilog implements Serializable {
         String ime = model.getIme();
         if(ime == null || ime.isBlank())
             throw new MissingParameterException("Item name must be given");
+        this.defaultime = ime;
         this.id = UUID.randomUUID();
         this.opis = model.getOpis();
         this.slika = model.getSlika();
