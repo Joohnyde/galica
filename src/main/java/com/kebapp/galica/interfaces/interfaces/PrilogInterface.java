@@ -7,6 +7,8 @@ package com.kebapp.galica.interfaces.interfaces;
 import com.kebapp.galica.entities.Prilog;
 import com.kebapp.galica.exceptions.*;
 import com.kebapp.galica.models.request.CreatePrilogModel;
+import java.util.Optional;
+import java.util.UUID;
 
 /**
  *
@@ -14,6 +16,9 @@ import com.kebapp.galica.models.request.CreatePrilogModel;
  */
 public interface PrilogInterface {
     
-    public Prilog parsePrilog(CreatePrilogModel model) throws SemanticException, MissingParameterException, InvalidUUIDException;
+    public Prilog parsePrilog(CreatePrilogModel model) throws MissingParameterException;
     
+    public void save(Prilog prilog);
+    
+    public Optional<Prilog> findById(UUID uuidPrilog);
 }

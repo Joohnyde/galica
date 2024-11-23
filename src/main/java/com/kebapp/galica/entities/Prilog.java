@@ -4,6 +4,8 @@
  */
 package com.kebapp.galica.entities;
 
+import com.kebapp.galica.exceptions.MissingParameterException;
+import com.kebapp.galica.models.request.CreatePrilogModel;
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -52,6 +54,17 @@ public class Prilog implements Serializable {
 
     public Prilog(UUID id) {
         this.id = id;
+    }
+
+    public Prilog(CreatePrilogModel model) throws MissingParameterException{
+        if(model == null)
+            throw new MissingParameterException("Model was null");
+        String ime = model.getIme();
+        if(ime == null || ime.isBlank())
+            throw new MissingParameterException("Item name must be given");
+        this.id = UUID.randomUUID();
+        this.opis = model.getOpis();
+        this.slika = model.getSlika();
     }
 
     public UUID getId() {

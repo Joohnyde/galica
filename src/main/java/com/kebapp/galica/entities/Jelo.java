@@ -147,7 +147,7 @@ public class Jelo implements Serializable {
     public List<Kategorijajelo> getKategorijajeloList() {
         return kategorijajeloList;
     }
-
+    
     public void setKategorijajeloList(List<Kategorijajelo> kategorijajeloList) {
         this.kategorijajeloList = kategorijajeloList;
     }

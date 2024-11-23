@@ -12,10 +12,11 @@ import com.kebapp.galica.exceptions.MissingParameterException;
 import com.kebapp.galica.exceptions.SemanticException;
 import com.kebapp.galica.interfaces.interfaces.JeloInterface;
 import com.kebapp.galica.interfaces.interfaces.KategorijaInterface;
+import com.kebapp.galica.interfaces.interfaces.KategorijajeloInterface;
 import com.kebapp.galica.interfaces.repositories.JeloRepository;
-import com.kebapp.galica.interfaces.repositories.KategorijajeloRepository;
 import com.kebapp.galica.models.request.CreateJeloModel;
 import com.kebapp.galica.models.request.CreateKategorijaModel;
+import com.kebapp.galica.models.utils.PostojecaKategorija;
 import java.util.Optional;
 import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,10 +30,10 @@ import org.springframework.stereotype.Service;
 public class JeloService implements JeloInterface {
     
     @Autowired
-    private JeloRepository JeloRepository;
+    private JeloRepository jeloRepository;
 
     @Autowired
-    private KategorijajeloRepository kategorijajeloRepository;
+    private KategorijajeloInterface kategorijajeloInterface;
     
     @Autowired
     private KategorijaInterface kategorijaInterface;
@@ -45,7 +46,7 @@ public class JeloService implements JeloInterface {
         // Додај му постојеће категорије
         if(createJeloObject.getPostojeceKategorije() != null){
             
-            for(CreateJeloModel.PostojecaKategorija postojecaKategorija : createJeloObject.getPostojeceKategorije()){
+            for(PostojecaKategorija postojecaKategorija : createJeloObject.getPostojeceKategorije()){
                 
                 if(postojecaKategorija == null) 
                     throw new SemanticException("One of the given categories is null");
@@ -66,7 +67,7 @@ public class JeloService implements JeloInterface {
                 рији из базе. Потребно је проверити постоји ли уопште тражена
                 категорија.
                 */
-                Optional<Kategorijajelo> maybeKategorija = kategorijajeloRepository.findById(uuidKategorija);
+                Optional<Kategorijajelo> maybeKategorija = kategorijajeloInterface.findById(uuidKategorija);
                 if(maybeKategorija.isEmpty())
                     throw new InvalidUUIDException("One of the given category UUIDs could not be found");
                 
@@ -100,7 +101,13 @@ public class JeloService implements JeloInterface {
                 novoJelo.getKategorijajeloList().add(novaKategorijaJelo);
             }
         }
-        JeloRepository.saveAndFlush(novoJelo);
+        
+        // Све је прошло да ваља - ручно каскадно сачувај све објекте
+        for(Kategorijajelo kategorijaJelo : novoJelo.getKategorijajeloList()){
+            kategorijaInterface.save(kategorijaJelo.getKategorijaId());
+            kategorijajeloInterface.save(kategorijaJelo);
+        }
+        jeloRepository.saveAndFlush(novoJelo);
         return (UUID) novoJelo.getId();
     }
     

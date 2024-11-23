@@ -18,4 +18,5 @@ public interface KategorijaInterface {
     
     public Kategorija parseKategorija(CreateKategorijaModel model) throws SemanticException, MissingParameterException, InvalidUUIDException;
     
+    public void save(Kategorija kategorija);
 }

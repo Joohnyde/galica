@@ -7,6 +7,7 @@ package com.kebapp.galica.entities;
 import com.kebapp.galica.exceptions.MissingParameterException;
 import com.kebapp.galica.exceptions.SemanticException;
 import com.kebapp.galica.models.request.CreateKategorijaModel;
+import com.kebapp.galica.models.utils.PrilogKategorija;
 import jakarta.persistence.Basic;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -59,7 +60,7 @@ public class Kategorija implements Serializable {
         String ime = model.getIme();
         Integer max = model.getMax();
         Integer min = model.getMin();
-        CreateKategorijaModel.PrilogKategorija[] prilozi = model.getPrilozi();
+        PrilogKategorija[] prilozi = model.getPrilozi();
         if(ime == null || ime.isBlank())
             throw new MissingParameterException("Category name must be given");
         if(max != null && max < 0 || min != null && min < 0 || min != null && max != null && min > max)
@@ -99,7 +100,7 @@ public class Kategorija implements Serializable {
     public List<Prilogkategorija> getPrilogkategorijaList() {
         return prilogkategorijaList;
     }
-
+    
     public void setPrilogkategorijaList(List<Prilogkategorija> prilogkategorijaList) {
         this.prilogkategorijaList = prilogkategorijaList;
     }

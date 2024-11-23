@@ -5,12 +5,13 @@
 package com.kebapp.galica.services;
 
 import com.kebapp.galica.entities.Prilog;
-import com.kebapp.galica.exceptions.InvalidUUIDException;
 import com.kebapp.galica.exceptions.MissingParameterException;
-import com.kebapp.galica.exceptions.SemanticException;
 import com.kebapp.galica.interfaces.interfaces.PrilogInterface;
+import com.kebapp.galica.interfaces.repositories.PrilogRepository;
 import com.kebapp.galica.models.request.CreatePrilogModel;
+import java.util.Optional;
 import java.util.UUID;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -19,10 +20,23 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class PrilogService implements PrilogInterface {
+    
+    @Autowired
+    private PrilogRepository prilogRepository;
 
     @Override
-    public Prilog parsePrilog(CreatePrilogModel model) throws SemanticException, MissingParameterException, InvalidUUIDException {
-        return new Prilog(UUID.randomUUID());
+    public Prilog parsePrilog(CreatePrilogModel model) throws MissingParameterException {
+        return new Prilog(model);
+    }
+
+    @Override
+    public void save(Prilog prilog) {
+        this.prilogRepository.saveAndFlush(prilog);
+    }
+
+    @Override
+    public Optional<Prilog> findById(UUID uuidPrilog) {
+        return this.prilogRepository.findById(uuidPrilog);
     }
     
 }
