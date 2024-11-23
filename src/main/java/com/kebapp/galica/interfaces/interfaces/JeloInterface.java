@@ -5,6 +5,7 @@
 package com.kebapp.galica.interfaces.interfaces;
 
 import com.kebapp.galica.exceptions.InvalidUUIDException;
+import com.kebapp.galica.exceptions.MissingParameterException;
 import com.kebapp.galica.exceptions.SemanticException;
 import com.kebapp.galica.models.request.CreateJeloModel;
 import java.util.UUID;
@@ -15,6 +16,6 @@ import java.util.UUID;
  */
 public interface JeloInterface {
     
-    public UUID createJelo(CreateJeloModel createJeloObject) throws SemanticException, InvalidUUIDException;
+    public UUID createJelo(CreateJeloModel createJeloObject) throws SemanticException, InvalidUUIDException, MissingParameterException;
     
 }

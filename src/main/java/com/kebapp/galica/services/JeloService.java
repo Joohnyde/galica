@@ -8,6 +8,7 @@ import com.kebapp.galica.entities.Jelo;
 import com.kebapp.galica.entities.Kategorija;
 import com.kebapp.galica.entities.Kategorijajelo;
 import com.kebapp.galica.exceptions.InvalidUUIDException;
+import com.kebapp.galica.exceptions.MissingParameterException;
 import com.kebapp.galica.exceptions.SemanticException;
 import com.kebapp.galica.interfaces.interfaces.JeloInterface;
 import com.kebapp.galica.interfaces.interfaces.KategorijaInterface;
@@ -37,7 +38,7 @@ public class JeloService implements JeloInterface {
     private KategorijaInterface kategorijaInterface;
     
     @Override
-    public UUID createJelo(CreateJeloModel createJeloObject) throws SemanticException, InvalidUUIDException {
+    public UUID createJelo(CreateJeloModel createJeloObject) throws SemanticException, InvalidUUIDException, MissingParameterException {
         // Креирај јело
         Jelo novoJelo = new Jelo(createJeloObject);
         

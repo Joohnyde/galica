@@ -4,6 +4,9 @@
  */
 package com.kebapp.galica.entities;
 
+import com.kebapp.galica.exceptions.MissingParameterException;
+import com.kebapp.galica.exceptions.SemanticException;
+import com.kebapp.galica.models.request.CreateKategorijaModel;
 import jakarta.persistence.Basic;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -15,6 +18,7 @@ import jakarta.persistence.NamedQuery;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.io.Serializable;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
 
@@ -47,6 +51,25 @@ public class Kategorija implements Serializable {
 
     public Kategorija(UUID id) {
         this.id = id;
+    }
+
+    public Kategorija(CreateKategorijaModel model) throws MissingParameterException, SemanticException {
+        if(model == null) 
+            throw new MissingParameterException("Model cannot be null");
+        String ime = model.getIme();
+        Integer max = model.getMax();
+        Integer min = model.getMin();
+        CreateKategorijaModel.PrilogKategorija[] prilozi = model.getPrilozi();
+        if(ime == null || ime.isBlank())
+            throw new MissingParameterException("Category name must be given");
+        if(max != null && max < 0 || min != null && min < 0 || min != null && max != null && min > max)
+            throw new SemanticException("min and max must satisfy : 0 <= min <= max");
+        if(prilozi == null || prilozi.length == 0)
+            throw new MissingParameterException("A category must have at least one item");
+        
+        this.defaultime = ime;
+        this.id = UUID.randomUUID();
+        this.prilogkategorijaList = new LinkedList<>();
     }
 
     public Object getId() {

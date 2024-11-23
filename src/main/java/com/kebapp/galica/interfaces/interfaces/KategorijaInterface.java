@@ -5,6 +5,9 @@
 package com.kebapp.galica.interfaces.interfaces;
 
 import com.kebapp.galica.entities.Kategorija;
+import com.kebapp.galica.exceptions.InvalidUUIDException;
+import com.kebapp.galica.exceptions.MissingParameterException;
+import com.kebapp.galica.exceptions.SemanticException;
 import com.kebapp.galica.models.request.CreateKategorijaModel;
 
 /**
@@ -13,6 +16,6 @@ import com.kebapp.galica.models.request.CreateKategorijaModel;
  */
 public interface KategorijaInterface {
     
-    public Kategorija parseKategorija(CreateKategorijaModel model);
+    public Kategorija parseKategorija(CreateKategorijaModel model) throws SemanticException, MissingParameterException, InvalidUUIDException;
     
 }
