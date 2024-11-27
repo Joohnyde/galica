@@ -73,7 +73,7 @@ public class Kategorija implements Serializable {
         this.prilogkategorijaList = new LinkedList<>();
     }
 
-    public Object getId() {
+    public UUID getId() {
         return id;
     }
 

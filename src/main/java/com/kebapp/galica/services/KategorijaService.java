@@ -87,6 +87,10 @@ public class KategorijaService implements KategorijaInterface{
     @Override
     public void save(Kategorija kategorija) {
         
+        Optional<Kategorija> findById = this.kategorijaRepository.findById(kategorija.getId());
+        
+        if(findById.isPresent()) return; // Категорија већ постоји
+        
         List<Prilogkategorija> listaPriloga = kategorija.getPrilogkategorijaList();
         
         kategorija.setPrilogkategorijaList(null);

@@ -55,7 +55,7 @@ public class Kategorijajelo implements Serializable {
         this.id = id;
     }
 
-    public Kategorijajelo(Jelo novoJelo, Kategorija kategorija, Integer max, Integer min) {
+    public Kategorijajelo(Jelo novoJelo, Kategorija kategorija, Integer min, Integer max) {
         this.id = UUID.randomUUID();
         this.jeloId = novoJelo;
         this.kategorijaId = kategorija;

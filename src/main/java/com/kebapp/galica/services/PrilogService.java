@@ -31,6 +31,9 @@ public class PrilogService implements PrilogInterface {
 
     @Override
     public void save(Prilog prilog) {
+        Optional<Prilog> findById = this.prilogRepository.findById(prilog.getId());
+        if(findById.isPresent()) return; // Категорија већ постоји
+        
         this.prilogRepository.saveAndFlush(prilog);
     }
 
